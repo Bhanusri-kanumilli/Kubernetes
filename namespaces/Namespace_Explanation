@@ -46,7 +46,8 @@ Changing the active namespace:
                     brew install kubectx 
                     kubens my-namespace 
                     kubens-list all the namespaces.
-  2)
+  2)kubectl config set-context --current --namespace=namespacename
+
 
 
 
