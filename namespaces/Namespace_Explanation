@@ -1,0 +1,43 @@
+Namespace: 
+Virtual cluster inside a cluster 
+organise resources in namespaces.
+When we create a kubernetes cluster,by default kubernetes gives 4 namespaces
+1) kubernetes-dashboard: it is specific to minikube 
+2) kube-system: we cannot create or modify anything in kune-system.It contains system processes,Master processes and kubectl processes. 
+3) kube-public: contains publicly accessible data.Ex: configmap contains cluster information.
+4) kube-node-release: which is heartbeat of nodes.each node associated lease object in namespace which contains details about availability of nodes.
+5)default: resources you create are located here.  
+
+
+What is the need of namespace? 
+1)If there is no namespace ,all pods,services ,configmaps all are stored in a single cluster.so we cant easily access the pods in that way.
+so we are creating namespaces inorder to group resources. For example, all the pods related to database are stored in database namespace,all pods related to monitoring are stored in monitoring namespace like that
+we will organize data using namespaces.  
+2)conflicts,many teams same application : 
+  if two teams are working on same cluster,first team deploy a application with name bhanu,if second team also deploy the application with same name ,conflict occurs.
+  It may be second application data will override the data in first appliation. 
+3)Resource sharing:
+4)Access and resource limits in namespaces: 
+team1 deveplops app in namespace1 and team2 develops app2 in namespace2,we can set access rights to teams that every team can access the application in their namespace only.They cant
+access the other teams namespace.
+  we can limit the resources that each namespace consumes.if we are having limited resources then we can set resource quotas and share the resources toeach namespace.
+
+
+Some of the components which cant be created within namespace like volumes,nodes which are globally live within the cluster.tou cant isolate them. 
+If we dont mention the namespace then resources are created within default namespace.
+According to official documentation of kubernetes,we should not use namespaces for smaller projects and upto 10 users.
+
+
+Commands: 
+Creation of namespace: 
+    1)kubectl create namespace namespacename  
+    2)By using yaml configuration file
+listing namespaces: 
+    kubectl get namespace 
+    kubectl get configmap ===kubectl get configmap -n default 
+    kubectl get all -n namespace  
+How to store components in a namespace: 
+   1) kubectl apply -f configmapsample.yaml --namespace=mynamespace 
+   2) By spacifying in configuration file. 
+
+
