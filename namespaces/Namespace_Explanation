@@ -24,7 +24,8 @@ access the other teams namespace.
 
 
 Some of the components which cant be created within namespace like volumes,nodes which are globally live within the cluster.tou cant isolate them. 
-If we dont mention the namespace then resources are created within default namespace.
+If we dont mention the namespace then resources are created within default namespace. 
+Its better to specify the namespace in configuration file than with kubectl command.so that its better documented and more convinient.
 According to official documentation of kubernetes,we should not use namespaces for smaller projects and upto 10 users.
 
 
@@ -38,6 +39,14 @@ listing namespaces:
     kubectl get all -n namespace  
 How to store components in a namespace: 
    1) kubectl apply -f configmapsample.yaml --namespace=mynamespace 
-   2) By spacifying in configuration file. 
+   2) By spacifying in configuration file.  
+
+Changing the active namespace: 
+  1) Using kubens:  kubens is a command-line utility used in Kubernetes environments to help users switch between different namespaces.  
+                    brew install kubectx 
+                    kubens my-namespace 
+                    kubens-list all the namespaces.
+  2)
+
 
 
