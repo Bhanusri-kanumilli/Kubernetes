@@ -7,7 +7,7 @@ kubectl apply -f mongoExp-depl.yaml
 
 **Kubernetes get commands; 
 kubectl get pod
-kubectl get pod --watch
+kubectl get pod --watch             // used to watch the status of pods in a Kubernetes cluster in real-time. When you run this command, it will display a continuously updating list of pods and their status, and it will automatically refresh as new pods are created or as existing pods change their status.
 kubectl get pod -o wide
 kubectl get service
 kubectl get secret
