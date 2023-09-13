@@ -1,0 +1,10 @@
+Creating components in a namespace using Yaml configuration
+
+apiVersion: v1
+kind: ConfigMap
+spec: 
+  metadata: 
+    name: mysql-configmap 
+    namespace: bhanu-namespace 
+  data: 
+    db_url: mysql-service.database
