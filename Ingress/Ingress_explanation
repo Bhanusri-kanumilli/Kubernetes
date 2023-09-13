@@ -1,0 +1,15 @@
+What is ingress? 
+  Ingress is an API object that manages external access to services within the cluster. It serves as a configuration for an Ingress controller, defining how external traffic should be routed and distributed to services based on various rules. 
+  Ingress resources are used to enable HTTP and HTTPS routing, load balancing, and host- or path-based routing for applications running in a Kubernetes cluster.
+What is Ingress controller? 
+  An Ingress controller is a software component that manages the configuration and routing of external traffic to services within the cluster. It is an entrypoint to clusters.
+  evaluates all the rules.manages redirections.
+  Ex:k8's nginx ingress controller.
+
+workflow: 
+  pod <- service <- ingress resource <- Ingress controller <-url in browser(http:my-app.com) 
+we will use ingress controller in two environiments: 
+1)cloud provider: loadbalancer act as entrypoint 
+2)bare metal evironiment: here we have to set up a server which acts as an entry point and accepts requests from webapp and send it to internal service. 
+
+
