@@ -1,0 +1,10 @@
+** To add the ingress controller to minikube: ** 
+Step-1: 
+     minikube addons enable ingress     --- Automatically start the k8s nginx implementationof ingress controller 
+     kubectl get pod -n kube-system - ingress controller is stored in kube-system namespace.  
+Step-2: creating ingress rule:  
+        kubectl get all -n kubernetes-dashboard 
+        
+
+     
+
