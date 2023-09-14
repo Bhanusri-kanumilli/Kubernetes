@@ -78,7 +78,12 @@ spec:
           service: 
             name: shopping-service
             port: 
-              number: 80  
+              number: 80   
+
+---
+#Ingress configuration for https requests using TLS certificate 
+
+
 
 
               
