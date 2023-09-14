@@ -8,7 +8,12 @@ step-3: apply the configuration rules
         kubectl apply -f dashboard-ingress.yaml 
 step-4: Checking whether ingress is created or not
         kubectl get ingress -n kubernetes-dashboard --watch  
-step-5: add ip address of ingress controller to /etc/hosts file
+step-5: add ip address of ingress controller to /etc/hosts file 
+        sudo vim /etc/hosts 
+        Enter password 
+        add xxxxxxx dashboard.com 
+step6:  kubectl describe ingress dashboard-ingress -n kubernetes-dashboard 
+
 
         
 
