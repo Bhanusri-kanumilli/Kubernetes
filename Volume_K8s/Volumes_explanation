@@ -9,3 +9,66 @@ Kubernetes doesn't give the data persistence,you have to configure the volumes.
 Basically, 1)we need a storage that doesn't depend on pod lifecycle,then newpod will read the data from storage and works continously.  
            2)we dont know which node pod will restartso we have to attach storage to all the nodes.
            3)we need highly available cluster that survive even after cluster crashes. 
+Persistant volume is a cluster resource like RAM,CPU.
+   -created via yaml file
+        kin:persistant volume 
+        spec: ex:how much storage we want to allocate for a vloume. 
+persistent volumee needs actual physical storage from any of the sources like local disk,nfs server,cloud storage. 
+where does this storage come from and who makes it available to the cluster?  
+whoever the user is there will decide everything like 
+  what type of storage do you need? 
+  you need to create and manage them by yourself. managing means maintaining backup of data, make sure data does not corrupt. 
+  persistent volume is an external plugin to a cluster. Multiple Applications in a cluster can use multiple storage option like local disk or cloud storage.
+In yaml configuration file we have to specify how much storage we need,what type of backend storage we need and access permissions we need. 
+Depending on backend storage type ,number of parameters are changed. 
+
+Complete list of storage backends supported by k8s is found in kubernetes official documentation. 
+Persistent volume placed in outside of the cluster.They are not placed in namespaces.accesible to whole cluster. 
+
+
+Local vs remote volume types: 
+  Each volume type has its own usecase.
+  Local volume type violates the 2 & 3 requirement for data persistence. 
+     Being tied to one specific node is violation. 
+     survive even after cluster crashes is also violated. 
+For DB persistence use remote storage. 
+
+K8s administrator & K8s user: 
+  persistent volumes are the resources that already there in the cluster,the pod that depends on it is created.
+  K8s admin setup and maintains the cluster and also make sure that cluster has enough resources.Ex:System administrator or devops engineer in a company. 
+  K8s user deploys the application in a cluster. Ex: developer or devops team will develop the application and deploy them.
+  k8s admin will makesure that storage is provisioned and available to the cluster it configures the nfs or cloud or local storage.creates the pv components from the storage backends. 
+
+Persistent Volume cliam: 
+ Persistent Volumes (PVs) are the physical or networked storage resources available in the cluster, while Persistent Volume Claims (PVCs) are requests for specific storage resources made by applications or users.
+ PVCs act as an abstraction layer, allowing developers to request storage without needing to know the details of the underlying PVs.
+ First we have to deploy the pvc confiuration then we refer that pvc configutaion in pods configuration.
+ Then pod requests the volume through PV Claim. Claim tries to find a volume in cluster.volume has the actual storage background then pod is deployed by consuming the volume.
+* claims must be in same namespce as claim using the pod. 
+  once pvc find out the sufficient backend volume ,volume is atteched to the pod and then volume is attached to the container. 
+Why so many abstractions? 
+Data should be safely stored. 
+Dont wnt to setup the actual storages. 
+Easier for developers because they dont need to take care of what type of storage is needed.
+
+ConfigMap and Secret: 
+* local volumes
+* not created via pv or pvc 
+* managed by kubernetes. 
+
+Create a configmap/or secret component 
+Mount that into your Pod or container. 
+Creation and mounting of volumes through pvc is a very tedious task for large no of applications in cluster .that's why we move into another component called storage Class. 
+
+Storage Class: 
+
+
+
+
+
+
+
+
+
+
+
