@@ -1,0 +1,11 @@
+How to persist data in kubernetes using volumes? 
+kubernetes storage consists of 3 components: 
+1) Persistent volume 
+2)persistent volume claim 
+3) storage class 
+Need for volumes: 
+if you are having an application and an database,if that application read and write the data to database ,suddenly if the pod crashes then entire data lost that's why we need persistent volumes.
+Kubernetes doesn't give the data persistence,you have to configure the volumes. 
+Basically, 1)we need a storage that doesn't depend on pod lifecycle,then newpod will read the data from storage and works continously.  
+           2)we dont know which node pod will restartso we have to attach storage to all the nodes.
+           3)we need highly available cluster that survive even after cluster crashes. 
