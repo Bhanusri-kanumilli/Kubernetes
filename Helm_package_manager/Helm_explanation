@@ -1,7 +1,48 @@
 Main Concepts of Helm 
 Helm changes alot from version to version,So understanding the basic common principles and usecases to when and why we use Helm.
 
-What is Helm? 
-What are helm charts? 
+What is Helm?  
+Package manager for kubernetes. Used to package yaml files and distribute them in public and private repositories. 
+Someone created the set of yaml files once and package them and made it available somewhere , so other people who also use the same deployment could use them in their kubernetes cluster. 
+
+What are helm charts?  
+  Bundle of yaml files is called Helm Charts. 
+  create your own helm charts using Helm. 
+  push them to Helm repository so that others can use them. 
+  Download and use existing ones. 
+1)Commonly used deployments like database applications,Elastic search,Mongodb,MySQL, monitoring applications like promotheus have complex setup all charts are available in Helm repository. 
+   helm install chartname : we can reuse the configuration someone else made. This functionality of sharing helm Charts is widely popular.
+If you need some deployment, then you can access by using cli :Helm search Keyword 
+                                                          Helm Hub 
+Apart from public repositories,we also having private repositories when companies can lauch Helm charts whuch can be accesible to employees within the organization.
+2)templating Engine: 
+  If you want to deploy an application which is made up of number of micro services,but in all deployment files of microservices only image name and versions are different then defining number of deployment files is a difficult task.
+ Using Helm, 1)we can define a common blueprint
+             2)Dynamic values are replaced by placeHolders.We can refer the dynamic values like image as {{.values.name}} and the image value is placed in another single yaml file. 
+               .value represents an object which is created based on the values defined. 
+               values defined either via yaml file or with --set flag. 
+3) Deploy same set of applications accross different clusters. 
+   by using Helm we can create a chart for the applicationso that we can deploy application in different environiments. 
+
+
+Helm Chart Structure: 
+mychart/     -->foldername of chart
+  chart.yaml -->meta Info about chart like name dependencies version 
+  values.yaml -->values for the template files these are default values you can override later. 
+  charts/     --> chart folder contains chart dependencies.
+  templates/  --> contains actual template files
+  ....        -->optionally other files like readme or license file in this folder
+Helm install chartname  --> to deploy those yaml files into kubernetes.template files will e filled with values from yaml file.
+
+values Injection into Template files : helm install --values=my-values.yaml<chartName>
+values.yaml                    my-values.yaml                   Result
+imageName: myApp        -->    version:2.0.0                 ImageName:myApp
+port:8080                                                    port: 8080
+version:1.0.0                                                version:2.0.0
+  Default                      Override values               values.object
+
+
 How to use them? 
 When to Use Them? 
+What is Tiller?
+
