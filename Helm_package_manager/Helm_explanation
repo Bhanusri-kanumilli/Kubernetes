@@ -39,9 +39,21 @@ values.yaml                    my-values.yaml                   Result
 imageName: myApp        -->    version:2.0.0                 ImageName:myApp
 port:8080                                                    port: 8080
 version:1.0.0                                                version:2.0.0
-  Default                      Override values               values.object
+  Default                      Override values               values.object 
+or on a command Line: 
+     helm install --set version=2.0.0
+third Feature: Release management
+client:Helm cli   server: also known as tiller which is present in kubernetes cluster. whenever client sends a request to install a helm chart it execues the request and installs the components in a cluster.  
+whenever we create or change deployment tiller will store a copy of deployment for future reference.It keep track of all chart executions. Changes are applied to existing deployment instead of creating new ones.It handles rollbacks.
+    1)Helm install <chartname>
+    2)Helm upgrade <chartname>
+    3)Helm rollback <chartName> 
+Downsides of Tiller: 
+Tiller has too much power inside of kubernetes cluster. It can create update delete components in cluster.This makes big security issue. 
+In Helm 3 tiller part got removed. It solves the security issue.
 
 
+    
 How to use them? 
 When to Use Them? 
 What is Tiller?
