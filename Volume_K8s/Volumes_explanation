@@ -60,7 +60,12 @@ Create a configmap/or secret component
 Mount that into your Pod or container. 
 Creation and mounting of volumes through pvc is a very tedious task for large no of applications in cluster .that's why we move into another component called storage Class. 
 
-Storage Class: 
+Storage Class:  
+Storage class provisions or creates volumes dynamically... when persistent volume claim claims it. 
+pod claims storage via pvc 
+pvc requests storage from storage class. 
+Storage class creates pv that meets the needs of the claim. 
+
 
 
 
