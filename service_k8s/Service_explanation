@@ -61,6 +61,9 @@ Option2: DNS lookup
            clusterIp: none
 3 service Type attributes: 
 clusterIp :default type,no need to specify. 
+
+Nodeport:
+NodePort is a simple way to expose a service externally by opening a static port on each node in the cluster.
 NodePort: it creates a service that is accesible on a static port on each worker node in a cluster.
 Nodeport Range: 300000 - 32767 anything outside the range wont be accepted. 
 
