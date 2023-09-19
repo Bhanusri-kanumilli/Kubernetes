@@ -1,11 +1,12 @@
 What is statefulset? 
 Statefulset is used specifically for stateful Applications.
 Examples of stateful applications: All databases like MySql,Mongodb.elastic search etc. 
-Any application that stores data for keep track of its state. 
+Any application that stores data for keep track of its state.  
+Stateful applications deployed using statefulset.
 
 Stateless applications: 
   don't keep record of state. 
   Each request is completely new. 
-
+  Stateless applications are deployed using deployment.
 why statefulset is used? 
 How statefulset works and how its different from deployment? 
