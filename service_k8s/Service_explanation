@@ -1,0 +1,80 @@
+What is a service and when we need it? 
+  Each pod has its own ip address
+    Pods are ephemeral - are destroyed frequently. 
+Service: 
+  stable ip address.
+  load balancing. 
+  loose coupling for communication within the cluster.
+
+  Several types of services in kubernetes: 
+
+  Cluster IP: 
+    Its a default type of a service.If youdont spcify any service then evry component will consider cluster ip as a default type. 
+
+  How does service know which pods to forward the request to?  
+    A service which identifies the member pods or endpoint pods through selectors. 
+    we will specify like this:
+    In pod file:                                  In service file: 
+    labels:                                       Selectors: 
+      App:  microservice-app                         App: microservice-app 
+  we will mention key value pair of labels specified in pod file as selectors in service file. 
+  service communication replica must match all the replicas of a pod.
+  It registers these pods as endpoints. 
+  Service must match all the selectors.  
+
+  How service know to which port it forward the request if pod contains multiple applications with multiple ports? 
+  using target post attribute.
+  ports:  
+     port: 3200   -->service port
+     targetPost: 3000   -->application in pod port. 
+  Whenever we are creating a service, 
+    K8s creates endpoint object. 
+    It has same name as service. 
+    keep track of which pods are the members/endpoints of service. 
+    service port is arbitary, but targetport must match the port, the container is listening at. 
+
+  Multiport services: 
+  ports:
+  - name: mongodb
+    protocol: Tcp 
+    port: 27017 
+    targetPort: 27017 
+  - name: mongodb-exporter 
+    protocol: Tcp 
+    port: 9027 
+    targetport: 9027  
+
+Headless services: 
+client needs to communicate with one specific pod directly. 
+pods want to talk directly with specific pod 
+so, not randomly selected. 
+usecase: stateful applications like databases. 
+pods replicas are not identical.only master is allowed to write to DB. 
+
+client needs to configure ip address of each pod. 
+Option1: Api call to k8s api server,then api server gives all the ip addresses of pods in a cluster.
+         this approach is inefficient because it is more depend on api server and getting the required ip address from all available addresses is a difficult task everytime when we call pod.
+Option2: DNS lookup 
+         Dns lookup for service - returns single ip address(cluster ip). 
+         set cluster ip to none it returns pod ip adress instead of service ip address. 
+         spec: 
+           clusterIp: none
+3 service Type attributes: 
+clusterIp :default type,no need to specify. 
+NodePort: it creates a service that is accesible on a static port on each worker node in a cluster.
+Nodeport Range: 300000 - 32767 anything outside the range wont be accepted. 
+
+
+Loadbalancer serviceType: 
+The way loadbalancer servicetype works is that the service become accesible externally throuh a cluod provider loadbalancer functionality.Ecah cloud provider has its own native loadbalancer implementation 
+that is created and used whenever we craete a loadbalancer service type. 
+whenever we created a loadbalancer service, automatically nodeport and clusterip service is created by kubernetes to which the external load balancer of the cloud provier will route traffic to.
+cluster ip <-- node port of worker node <---- loadbalancer
+Loadbalancer service is an externtion of nodeport service. 
+nodeport service is an extension of clusterip service. 
+ 
+         
+
+  
+  
+  
